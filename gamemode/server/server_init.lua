@@ -14,12 +14,22 @@ end)
 
 function GM:PlayerInitialSpawn(player)
     player:SetTeam(1)
+	
+end
+ 
+function GM:PlayerSpawn( ply )
+	if ply:Team()==3 then
+		GAMEMODE:PlayerSpawnAsSpectator( ply )
+	end
+	hook.Call( "PlayerLoadout", GAMEMODE, ply )  -- PlayerSpawn in base already calls PlayerLoadout!
+
 end
  
 function GM:PlayerLoadout(player)
     if player:Team() == 1 then
         player:Give( "weapon_crowbar" )
     end
+	
 end 
 
 --[[
