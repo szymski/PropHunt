@@ -1,3 +1,5 @@
+print("Initializing shared")
+
 --[[
 	Teams
 ]]--

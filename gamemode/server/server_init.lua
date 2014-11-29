@@ -1,3 +1,5 @@
+print("Initializing server")
+
 --[[
 	Player spawning
 ]]--
