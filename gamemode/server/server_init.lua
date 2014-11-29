@@ -24,7 +24,7 @@ end
 
 --[[
 	Changing to prop
-]]--
+]]--   
 
 function GM:KeyPress(player, key)
 	if player:Team() == 2 && key == IN_ATTACK then
@@ -41,7 +41,12 @@ end
 ]]--
 
 function GM:EntityTakeDamage( target, dmginfo)
-	if dmginfo:GetAttacker( ):IsPlayer() and target:GetClass()=="prop_physics" then 
+	if target:IsPlayer() and dmginfo:GetAttacker( ):IsPlayer() then
+		if dmginfo:GetAttacker( ):Team()==target:Team() then
+			dmginfo:SetDamage(0)
+		end
+	
+	elseif dmginfo:GetAttacker( ):IsPlayer() and target:GetClass()=="prop_physics" then 
 		for k, ply in pairs( player.GetAll() ) do
 			dmginfo:GetAttacker( ):TakeDamage( dmginfo:GetDamage( )/3, target, target) 
 		end
