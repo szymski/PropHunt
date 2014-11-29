@@ -1,6 +1,14 @@
 print("Initializing server")
 
 --[[
+	Teams
+]]--
+
+concommand.Add( "ph_team", function(player, command, args)
+	 player:SetTeam(tonumber(args[1] or 1))
+end)
+
+--[[
 	Player spawning
 ]]--
 
