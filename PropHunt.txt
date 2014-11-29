@@ -4,4 +4,24 @@
 	"base"		"base"
 	"maps"		"^ph_"
 	"menusystem"	"1"
+	"settings"
+	{
+		1
+		{
+			"name"		"ph_healthMult"
+			"text"		"Health Multiplier"
+			"help"		"Multiplier of health after disquse into a prop"
+			"type"		"Numeric"
+			"default"	"1.0"
+		}
+		2
+		{
+			"name"		"ph_roundTime"
+			"text"		"Round Time"
+			"help"		"Time after childs win"
+			"type"		"Numeric"
+			"default"	"3"
+		}
+	}
+
 }
