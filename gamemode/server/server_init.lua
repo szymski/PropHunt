@@ -27,3 +27,15 @@ function GM:KeyPress(player, key)
 		end
 	end
 end
+
+--[[
+	Attacking props
+]]--
+
+function GM:EntityTakeDamage( target, dmginfo)
+	if dmginfo:GetAttacker( ):IsPlayer() and target:GetClass()=="prop_physics" then 
+		for k, ply in pairs( player.GetAll() ) do
+			dmginfo:GetAttacker( ):TakeDamage( dmginfo:GetDamage( )/3, target, target) 
+		end
+	end
+end
