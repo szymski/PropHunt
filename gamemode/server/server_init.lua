@@ -1,6 +1,6 @@
 print("Initializing server")
 
-resource.AddFile("models/player/pbear/")
+resource.AddFile("content/models/player/pbear/")
 
 include("chat.lua")
 
