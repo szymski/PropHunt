@@ -5,6 +5,5 @@ AddCSLuaFile("client/hud.lua")
 AddCSLuaFile("client/chat.lua")
 AddCSLuaFile("shared/shared_init.lua")
  
-include("server/chat.lua")
 include("server/server_init.lua")
 include("shared.lua")
