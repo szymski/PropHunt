@@ -1,10 +1,14 @@
 print("Initializing server")
 
+include("chat.lua")
+
 --[[
 	Teams   
 ]]--
+
 SendChatMessageToAll(Color(255,255,0),"hi")
 concommand.Add( "ph_team", function(player, command, args)
+	player:Kill();
 	 player:SetTeam(tonumber(args[1] or 1))
 end)
 
@@ -61,6 +65,15 @@ function GM:KeyPress(player, key)
 		local trace = player:GetEyeTrace()
 		if trace.Entity && trace.Entity:GetClass() == "prop_physics" then
 			player:SetModel(trace.Entity:GetModel())
+			if player.prop then
+				player.prop:SetModel(trace.Entity:GetModel())
+			else
+				local entity = ents.Create("ph_prop")
+				entity.owner = player
+				entity:SetModel(trace.Entity:GetModel())
+				entity:Spawn()
+				player.prop = entity
+			end
 			player:ChatPrint("You have changed!")
 		end
 	end

@@ -1,5 +1,7 @@
 print("Initializing shared")
 
+PEDOHUNT = { }
+
 --[[
 	Teams
 ]]--
