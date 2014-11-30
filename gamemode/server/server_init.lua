@@ -1,9 +1,9 @@
 print("Initializing server")
 
 --[[
-	Teams
+	Teams 
 ]]--
-SendChatMessage(Color(255,255,0),"hi")
+SendChatMessageToAll(Color(255,255,0),"hi")
 concommand.Add( "ph_team", function(player, command, args)
 	 player:SetTeam(tonumber(args[1] or 1))
 end)
@@ -21,12 +21,12 @@ end
 function GM:DoPlayerDeath(ply, attacker, dmg )
 	if ply:Team()==2 then -- When you die as the child then you're respawning as pedobear
 		ply:SetTeam(3)
-		ply:PrintMessage( 3, "You died, your little body has been eaten by pedobear, now you'll return from the hell as a pedobear!" )
+		SendChatMessage(ply,Color(255,0,0), "You died, your little body has been eaten by pedobear, now you'll return from the hell as a pedobear!" )
 		timer.Create( "Respawn_Player_"..ply:GetName( ), 5, 1, function() SpawnAsPedo(ply) end )		
 	end 
 	if ply:Team()==1 then -- When you die as the child then you're respawning as pedobear
 		ply:SetTeam(3)
-		ply:PrintMessage( 3, "You died as a pedobear, there is no return!" )
+		SendChatMessage(ply,Color(255,0,0),  "You died as a pedobear, there is no return!" )
 	end 	
 end
 	
