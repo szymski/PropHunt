@@ -1,6 +1,6 @@
 "base"
 {
-	"title"		"Pedo Hunt"
+	"title"		"PedoHunt"
 	"base"		"base"
 	"maps"		"^ph_"
 	"menusystem"	"1"

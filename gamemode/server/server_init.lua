@@ -1,5 +1,7 @@
 print("Initializing server")
 
+resource.AddFile("models/player/pbear/")
+
 include("chat.lua")
 
 --[[
@@ -8,8 +10,12 @@ include("chat.lua")
 
 SendChatMessageToAll(Color(255,255,0),"hi")
 concommand.Add( "ph_team", function(player, command, args)
-	player:Kill();
-	 player:SetTeam(tonumber(args[1] or 1))
+	player:StripWeapons()
+	player:SetTeam(tonumber(args[1] or 1))
+	if player:Team() == 1 then
+		player:SetModel("models/player/pbear/pbear.mdl")
+	end
+	player:Spawn()
 end)
 
 --[[
@@ -18,7 +24,7 @@ end)
 
 function GM:PlayerInitialSpawn(player)
     player:SetTeam(1)
-	
+	player:SetModel("models/player/pbear/pbear.mdl")
 end
  
 
@@ -37,7 +43,7 @@ end
 function GM:PlayerSpawn( ply ) 
 	if(ply:Team()==0 or ply:Team()>3) then ply:SetTeam(3); end --Adding player to spectators when his team is invalid.
 	if ply:Team()==3 then --When you're spectator or pedobear already you can't respawn normally.
-		GAMEMODE:PlayerSpawnAsSpectator( ply ) 
+		--GAMEMODE:PlayerSpawnAsSpectator( ply ) 
 		return
 	end 
 	hook.Call( "PlayerLoadout", GAMEMODE, ply )  -- PlayerSpawn in base already calls PlayerLoadout!
@@ -47,6 +53,7 @@ end
 function SpawnAsPedo(ply)
 	ply:SetTeam(1)
 	ply:Spawn()
+	ply:SetModel("models/player/pbear/pbear.mdl")
 end
 
 function GM:PlayerLoadout(player)
