@@ -56,9 +56,11 @@ function GM:DoPlayerDeath(ply, attacker, dmg )
 end
 	
 function GM:PlayerSpawn( ply ) 
+	ply:UnSpectate();
 	if(ply:Team()==0 or ply:Team()>3) then ply:SetTeam(3); end --Adding player to spectators when his team is invalid.
 	if ply:Team()==3 then --When you're spectator or pedobear already you can't respawn normally.
-		--GAMEMODE:PlayerSpawnAsSpectator( ply ) 
+		GAMEMODE:PlayerSpawnAsSpectator(ply)
+		ply:Spectate(6 );
 		return
 	end 
 	hook.Call( "PlayerLoadout", GAMEMODE, ply )  -- PlayerSpawn in base already calls PlayerLoadout!
@@ -70,7 +72,7 @@ function SpawnAsPedo(ply)
 	ply:Spawn()
 	util.PrecacheModel("models/player/pbear/pbear.mdl")
 	ply:SetModel("models/player/pbear/pbear.mdl")
-	player:SetColor(Color(255,255,255,255))
+	ply:SetColor(Color(255,255,255,255))
 end
 
 function GM:PlayerLoadout(player)
