@@ -3,7 +3,6 @@
 |> LOCAL VARIABLES
 \***************************************************************************************************************/
 
-local Ply        = LocalPlayer()
 local ResX, ResY = ScrW(), ScrH()
 local PosX, PosY = ResX - 260, ResY - 90
 
@@ -23,10 +22,12 @@ end
 
 local function DrawElements()
 	
-	local Weapon   = Ply:GetActiveWeapon()
+	local Ply = LocalPlayer()
+	
+	local Weapon   = Ply:GetActiveWeapon() 
 	
 	local Health   = Ply:Health()
-	local Clip     = Weapon:Clip1()          or 0
+	local Clip     = (Weapon:IsValid() and Weapon:Clip1() or 0)
 	/*local ClipSize = Weapon.Primary.ClipSize or 0
 	local Ammo     = Weapon:Ammo1()          or 0*/
 	
