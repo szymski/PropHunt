@@ -1,6 +1,17 @@
 print("Initializing server")
 
-resource.AddFile("content/models/player/pbear/")
+resource.AddFile("models/player/pbear/pbear.dx80.vtx")
+resource.AddFile("models/player/pbear/pbear.dx90.vtx")
+resource.AddFile("models/player/pbear/pbear.mdl")
+resource.AddFile("models/player/pbear/pbear.phy")
+resource.AddFile("models/player/pbear/pbear.sw.vtx")
+resource.AddFile("models/player/pbear/pbear.vvd")
+resource.AddFile("models/player/pbear/pbear.xbox.vtx")
+
+resource.AddFile("materials/models/player/kuristaja/pbear/bear.vtf")
+resource.AddFile("materials/models/player/kuristaja/pbear/bear_normal.vtf")
+resource.AddFile("materials/models/player/kuristaja/pbear/lightwarp2.vtf")
+resource.AddFile("materials/models/player/kuristaja/pbear/pbear.vmt")
 
 include("chat.lua")
 
@@ -13,9 +24,11 @@ concommand.Add( "ph_team", function(player, command, args)
 	player:StripWeapons()
 	player:SetTeam(tonumber(args[1] or 1))
 	if player:Team() == 1 then
+		util.PrecacheModel("models/player/pbear/pbear.mdl")
 		player:SetModel("models/player/pbear/pbear.mdl")
 	end
 	player:Spawn()
+	player:SetColor(Color(255,255,255,255))
 end)
 
 --[[
@@ -24,7 +37,9 @@ end)
 
 function GM:PlayerInitialSpawn(player)
     player:SetTeam(1)
+	util.PrecacheModel("models/player/pbear/pbear.mdl")
 	player:SetModel("models/player/pbear/pbear.mdl")
+	player:SetColor(Color(255,255,255,255))
 end
  
 
@@ -53,7 +68,9 @@ end
 function SpawnAsPedo(ply)
 	ply:SetTeam(1)
 	ply:Spawn()
+	util.PrecacheModel("models/player/pbear/pbear.mdl")
 	ply:SetModel("models/player/pbear/pbear.mdl")
+	player:SetColor(Color(255,255,255,255))
 end
 
 function GM:PlayerLoadout(player)
@@ -72,7 +89,7 @@ function GM:KeyPress(player, key)
 		local trace = player:GetEyeTrace()
 		if trace.Entity && trace.Entity:GetClass() == "prop_physics" then
 			player:SetModel(trace.Entity:GetModel())
-			if player.prop then
+			if player.prop && player.prop:IsValid() then
 				player.prop:SetModel(trace.Entity:GetModel())
 			else
 				local entity = ents.Create("ph_prop")
@@ -81,6 +98,8 @@ function GM:KeyPress(player, key)
 				entity:Spawn()
 				player.prop = entity
 			end
+			player:SetModel("")
+			player:SetColor(Color(255,255,255,0))
 			player:ChatPrint("You have changed!")
 		end
 	end

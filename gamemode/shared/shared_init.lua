@@ -1,7 +1,5 @@
 print("Initializing shared")
 
-player_manager.AddValidModel("Pedo Bear", "models/player/pbear/")
-
 PEDOHUNT = { }
 
 --[[
