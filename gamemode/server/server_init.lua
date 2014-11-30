@@ -3,7 +3,7 @@ print("Initializing server")
 --[[
 	Teams
 ]]--
-
+SendChatMessage(Color(255,255,0),"hi")
 concommand.Add( "ph_team", function(player, command, args)
 	 player:SetTeam(tonumber(args[1] or 1))
 end)
