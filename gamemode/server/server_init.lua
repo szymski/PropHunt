@@ -17,14 +17,35 @@ function GM:PlayerInitialSpawn(player)
 	
 end
  
-function GM:PlayerSpawn( ply )
-	if ply:Team()==3 then
-		GAMEMODE:PlayerSpawnAsSpectator( ply )
-	end
+
+function GM:DoPlayerDeath(ply, attacker, dmg )
+	if ply:Team()==2 then -- When you die as the child then you're respawning as pedobear
+		ply:SetTeam(3)
+		ply:PrintMessage( 3, "You died, your little body has been eaten by pedobear, now you'll return from the hell as a pedobear!" )
+		timer.Create( "Respawn_Player_"..ply:GetName( ), 5, 1, function() SpawnAsPedo(ply) end )		
+	end 
+	if ply:Team()==1 then -- When you die as the child then you're respawning as pedobear
+		ply:SetTeam(3)
+		ply:PrintMessage( 3, "You died as a pedobear, there is no return!" )
+	end 	
+end
+	
+function GM:PlayerSpawn( ply ) 
+	if ply:Team()==3 then --When you're spectator or pedobear already you can't respawn normally.
+		GAMEMODE:PlayerSpawnAsSpectator( ply ) 
+		return
+	end 
+
 	hook.Call( "PlayerLoadout", GAMEMODE, ply )  -- PlayerSpawn in base already calls PlayerLoadout!
 
 end
- 
+
+function SpawnAsPedo(ply)
+
+	ply:SetTeam(1)
+	ply:Spawn()
+end
+
 function GM:PlayerLoadout(player)
     if player:Team() == 1 then
         player:Give( "weapon_crowbar" )
