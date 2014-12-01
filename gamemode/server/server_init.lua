@@ -14,6 +14,7 @@ resource.AddFile("materials/models/player/kuristaja/pbear/lightwarp2.vtf")
 resource.AddFile("materials/models/player/kuristaja/pbear/pbear.vmt")
 
 include("chat.lua")
+include("round.lua")
 
 --[[
 	Teams   
